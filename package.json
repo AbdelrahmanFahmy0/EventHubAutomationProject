@@ -1,0 +1,32 @@
+{
+  "name": "eventhubautomationproject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf test-output/reports/allure-results && rimraf test-output/reports/allure-report && rimraf test-output/logs/logs.log",
+    "test": "npm run clean & playwright test & npm run report",
+    "test:chrome": "npm run clean & cross-env BROWSER=chrome playwright test & npm run report",
+    "test:firefox": "npm run clean & cross-env BROWSER=firefox playwright test & npm run report",
+    "test:edge": "npm run clean & cross-env BROWSER=edge playwright test & npm run report",
+    "test:smoke": "npm run clean & playwright test --grep @smoke & npm run report",
+    "test:regression": "npm run clean & playwright test --grep @regression & npm run report",
+    "report": "allure generate test-output/reports/allure-results",
+    "report:open": "allure open test-output/reports/allure-report"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.62.1",
+    "@types/node": "^26.2.0",
+    "ajv": "^8.20.0",
+    "allure": "^3.15.0",
+    "allure-playwright": "^3.10.2",
+    "cross-env": "^10.1.0",
+    "dotenv": "^17.4.2",
+    "rimraf": "^6.1.3",
+    "winston": "^3.19.0"
+  }
+}

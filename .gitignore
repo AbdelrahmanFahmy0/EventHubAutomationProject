@@ -1,0 +1,12 @@
+
+# Playwright
+node_modules/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/
+
+# Output directories
+test-output/
+
+# Storage State
+storage-state.json

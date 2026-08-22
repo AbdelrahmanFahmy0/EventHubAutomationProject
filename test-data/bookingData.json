@@ -1,0 +1,19 @@
+{
+    "customerName": "Abdelrahman",
+    "customerEmail": "abdelrahman@example.com",
+    "customerPhone": "+91-9876232109",
+    "confirmedStatus": "confirmed",
+    "invalidEmailFormat": "test@.com",
+    "invalidPhoneFormat": "123456789",
+    "bookingQuantity": 2,
+    "messages": {
+        "bookingCreated": "Booking Confirmed! 🎉",
+        "bookingCancelled": "Booking cancelled successfully",
+        "cancelConfirmation": "This will cancel {bookingReference} and release {bookingQuantity} seat(s) back to the event. This action cannot be undone.",
+        "cancelConfirmationMSG": "Cancelling {bookingReference} will release {bookingQuantity} seat(s) back to the event. This cannot be undone.",
+        "invalidCustomerName": "Name must be at least 2 chars",
+        "invalidCustomerEmail": "Enter a valid email",
+        "invalidCustomerPhone": "Enter a valid 10-digit phone",
+        "noBookingsMessage": "No bookings found"
+    }
+}

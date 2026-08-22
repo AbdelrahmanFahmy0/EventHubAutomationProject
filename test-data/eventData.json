@@ -1,0 +1,29 @@
+{
+    "eventTitle": "Event_",
+    "futureEventTitle": "Future of Technology_",
+    "eventCategory": "Sports",
+    "eventCity": "New York",
+    "eventVenue": "Madison Square Garden",
+    "eventPrice": "100",
+    "eventTotalSeats": "500",
+    "negativeNumber": "-100",
+    "decimalPrice": "10.99",
+    "indianCity": "Delhi",
+    "indianCity2": "Mumbai",
+    "cityWithNoEvents": "Pune",
+    "conferenceCategory": "Conference",
+    "concertCategory": "Concert",
+    "workshopCategory": "Workshop",
+    "festivalCategory": "Festival",
+    "messages": {
+        "eventCreated": "Event created!",
+        "eventTitleRequired": "Title is required",
+        "eventCityRequired": "City is required",
+        "eventVenueRequired": "Venue is required",
+        "eventDateRequired": "Event date is required",
+        "invalidEventPrice": "Enter a valid price (≥ 0)",
+        "invalidEventTotalSeats": "Must have at least 1 seat",
+        "eventDateInPast": "Must be a future date",
+        "noEventsMessage": "No events found"
+    }
+}

@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="760" viewBox="0 0 1200 760" role="img" aria-labelledby="title desc">
+  <title id="title">EventHub Automation - Core Architecture</title>
+  <desc id="desc">Clean architecture diagram with key components and clear flow.</desc>
+
+  <defs>
+    <style>
+      .bg { fill: #0b1220; }
+      .title { fill: #f8fafc; font: 700 46px 'Segoe UI', Arial, sans-serif; }
+      .card { fill: #111827; stroke: #334155; stroke-width: 2; rx: 16; ry: 16; }
+      .card-title { fill: #f8fafc; font: 700 24px 'Segoe UI', Arial, sans-serif; }
+      .card-sub { fill: #cbd5e1; font: 400 16px 'Segoe UI', Arial, sans-serif; }
+      .card-title-sm { fill: #f8fafc; font: 700 20px 'Segoe UI', Arial, sans-serif; }
+      .badge-text { fill: #020617; font: 700 12px 'Segoe UI', Arial, sans-serif; letter-spacing: 0.5px; }
+      .link {
+        fill: none;
+        stroke: #93c5fd;
+        stroke-width: 4;
+        stroke-linecap: round;
+        stroke-dasharray: 12 9;
+        marker-end: url(#arrow);
+        animation: dash 4.8s linear infinite;
+      }
+      @keyframes dash { to { stroke-dashoffset: -220; } }
+      .tests { fill: #4f46e5; }
+      .fixtures { fill: #0ea5e9; }
+      .core { fill: #10b981; }
+      .app { fill: #ef4444; }
+      .report { fill: #a855f7; }
+      .ci { fill: #22c55e; }
+      .data { fill: #64748b; }
+    </style>
+
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L12,6 L0,12 Z" fill="#93c5fd" />
+    </marker>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1200" height="760" />
+  <text class="title" x="600" y="68" text-anchor="middle">EventHub Automation - Core Architecture</text>
+
+  <!-- Main flow -->
+  <path class="link" style="animation-delay:-0.0s" d="M310 370 C340 370, 350 370, 380 370" />
+  <path class="link" style="animation-delay:-0.2s" d="M600 370 C630 370, 640 370, 670 370" />
+  <path class="link" style="animation-delay:-0.4s" d="M890 370 C920 370, 930 370, 960 370" />
+
+  <!-- Supporting flows -->
+  <path class="link" style="animation-delay:-0.6s" d="M1070 440 C1070 475, 1070 495, 1070 530" />
+  <path class="link" style="animation-delay:-0.8s" d="M1070 530 C1070 475, 1070 330, 1070 220" />
+  <path class="link" style="animation-delay:-1.0s" d="M1070 160 C900 120, 420 130, 200 300" />
+  <path class="link" style="animation-delay:-1.2s" d="M200 530 C200 495, 200 475, 200 440" />
+
+  <!-- Cards row -->
+  <g transform="translate(90,300)">
+    <rect class="card" width="220" height="140" />
+    <rect class="tests" x="14" y="12" width="50" height="22" rx="11" />
+    <text class="badge-text" x="39" y="27" text-anchor="middle">TESTS</text>
+    <text class="card-title" x="14" y="70">tests/</text>
+    <text class="card-sub" x="14" y="97">Playwright specs</text>
+    <text class="card-sub" x="14" y="120">@smoke / @regression</text>
+  </g>
+
+  <g transform="translate(380,300)">
+    <rect class="card" width="220" height="140" />
+    <rect class="fixtures" x="14" y="12" width="66" height="22" rx="11" />
+    <text class="badge-text" x="47" y="27" text-anchor="middle">FIXTURES</text>
+    <text class="card-title" x="14" y="70">test-fixtures.ts</text>
+    <text class="card-sub" x="14" y="97">Injects pages + APIs</text>
+  </g>
+
+  <g transform="translate(670,300)">
+    <rect class="card" width="220" height="140" />
+    <rect class="core" x="14" y="12" width="56" height="22" rx="11" />
+    <text class="badge-text" x="42" y="27" text-anchor="middle">CORE</text>
+    <text class="card-title" x="14" y="70">Pages + APIs</text>
+    <text class="card-sub" x="14" y="97">Built on src/utils/</text>
+  </g>
+
+  <g transform="translate(960,300)">
+    <rect class="card" width="220" height="140" />
+    <rect class="app" x="14" y="12" width="44" height="22" rx="11" />
+    <text class="badge-text" x="36" y="27" text-anchor="middle">AUT</text>
+    <text class="card-title" x="14" y="70">EventHub App</text>
+    <text class="card-sub" x="14" y="97">Web UI + REST API</text>
+  </g>
+
+  <!-- Secondary cards -->
+  <g transform="translate(90,530)">
+    <rect class="card" width="220" height="120" />
+    <rect class="data" x="14" y="12" width="44" height="22" rx="11" />
+    <text class="badge-text" x="36" y="27" text-anchor="middle">DATA</text>
+    <text class="card-title" x="14" y="68">test-data/*.json</text>
+    <text class="card-sub" x="14" y="94">auth / event / booking</text>
+  </g>
+
+  <g transform="translate(960,530)">
+    <rect class="card" width="220" height="120" />
+    <rect class="report" x="14" y="12" width="62" height="22" rx="11" />
+    <text class="badge-text" x="45" y="27" text-anchor="middle">REPORTS</text>
+    <text class="card-title-sm" x="14" y="64">test-output/</text>
+    <text class="card-title-sm" x="14" y="88">reports</text>
+    <text class="card-sub" x="14" y="108">Allure + Playwright</text>
+  </g>
+
+  <g transform="translate(960,100)">
+    <rect class="card" width="220" height="120" />
+    <rect class="ci" x="14" y="12" width="30" height="22" rx="11" />
+    <text class="badge-text" x="29" y="27" text-anchor="middle">CI</text>
+    <text class="card-title" x="14" y="68">GitHub Actions</text>
+    <text class="card-sub" x="14" y="94">Runs regression suite</text>
+  </g>
+</svg>

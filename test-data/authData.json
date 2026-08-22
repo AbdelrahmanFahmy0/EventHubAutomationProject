@@ -1,0 +1,16 @@
+{
+  "registerEmail": "TestUser_",
+  "loginEmail": "TestAccount_",
+  "logoutEmail": "TestEmail_",
+  "password": "P@ssw0rd",
+  "invalidEmail": "invalid_email@.com",
+  "nonExistingEmail": "nonexisting@gmail.com",
+  "messages": {
+    "existingEmail": "Email already registered",
+    "invalidEmail": "Enter a valid email",
+    "mismatchedPassword": "Passwords do not match",
+    "weakPassword": "Password does not meet the requirements below",
+    "invalidCredentials": "Invalid email or password",
+    "invalidPassword": "Password must be at least 6 characters"
+  }
+}
