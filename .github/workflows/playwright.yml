@@ -48,6 +48,10 @@ jobs:
         env:
           CI: true
 
+      - name: Generate Allure Report
+        if: ${{ !cancelled() }}
+        run: npm run report
+
       - name: Save Allure History
         if: ${{ !cancelled() }}
         uses: actions/cache/save@v5
