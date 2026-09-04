@@ -1,0 +1,75 @@
+// GENERIC REFERENCE TEMPLATE — a repo-agnostic starting scaffold for a Page Object class.
+// Adapt every part of this to the CURRENT repository's real conventions once discovered: folder
+// layout, naming, imports, decorators, helper wrappers, base classes. If a real file in this repo
+// already covers the same case, follow its exact shape instead of this generic one.
+// Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before editing.
+//
+// Likely file path convention: <pages-dir>/<Area>/<Name>Page.ts (or <Name>Dialog.ts for modals) —
+// confirm the real convention in this repo before naming/placing the file.
+// If the repo uses a barrel/index file for Page Objects, export the new class from it too.
+
+import { type Page, type Locator, expect } from "@playwright/test";
+// If this repo has action/assertion helper wrappers, a step-logging decorator, or a logger,
+// import and use them here instead of calling `page`/`locator` methods directly — don't invent a
+// new helper layer if one already exists.
+// Only needed if this page shares nav-bar/session chrome, or extends a dialog it triggers:
+// import { <SharedBase> } from "../<Area>/<SharedBase>";
+// import { <Name>Dialog } from "./<Name>Dialog";
+
+// Extend a base class only when reusing shared chrome (nav bar/layout), OR when this page is the
+// one that triggers a dialog it should expose methods for — a dialog is typically NOT given its
+// own fixture; the page that opens it extends the dialog class instead. Example:
+// export class <Name>Page extends <SharedBase> {
+// export class <Name>Page extends <Name>Dialog {
+export class <Name>Page {
+
+    //=====================Locators=====================
+    private readonly page: Page;
+    // If extending a base class, do NOT redeclare `page` here and do NOT reassign
+    // `this.page = page` in the constructor — `super(page)` already sets it.
+    private readonly someButton: Locator;
+    private readonly someField: Locator;
+    private readonly errorMessage: Locator;
+
+    //=====================Variables====================
+    private readonly pageUrl = '/<route>';
+
+    //=====================Constructor==================
+    constructor(page: Page) {
+        this.page = page;
+        // If extending: super(page); (no `this.page = page` line, no field redeclaration)
+
+        // Locator priority: dedicated test attribute > id/name > stable custom attribute >
+        // stable CSS > accessible role/label/text > relative XPath. Every locator here must be
+        // confirmed live via the available Playwright MCP tools before landing in this file —
+        // never guessed from reading application source.
+        this.someButton = this.page.getByTestId('some-button');
+        this.someField = this.page.getByTestId('some-field');
+        this.errorMessage = this.page.locator('[data-testid="some-field-error"]');
+    }
+
+    //=================Dynamic Locators=================
+    // Use a method (not a fixed field) when the locator depends on a runtime value,
+    // e.g. filtering a list card by title.
+    private itemCard(title: string): Locator {
+        return this.page.getByTestId('item-card').filter({ hasText: title });
+    }
+
+    //=====================Actions======================
+    async navigate() {
+        await this.page.goto(this.pageUrl);
+    }
+
+    async enterSomeField(value: string) {
+        await this.someField.fill(value);
+    }
+
+    async clickOnSomeButton() {
+        await this.someButton.click();
+    }
+
+    //=====================Assertions===================
+    async assertSomeFieldErrorMessage(expectedMessage: string) {
+        await expect(this.errorMessage).toHaveText(expectedMessage);
+    }
+}

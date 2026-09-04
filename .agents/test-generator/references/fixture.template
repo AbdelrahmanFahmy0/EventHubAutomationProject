@@ -1,0 +1,59 @@
+// GENERIC REFERENCE TEMPLATE — how to wire a new Page Object / API endpoint class into a
+// repository's fixture system and test data, once that mechanism is confirmed to exist. Adapt to
+// the real mechanism found in the repo (Playwright's `test.extend`, a Page-Object-Manager class,
+// manual instantiation per test, etc.) — don't assume Playwright's native fixture API is in use
+// until confirmed. Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before
+// editing. For the API endpoint CLASS BODY itself (not just its fixture wiring), see
+// api-endpoint.template.
+
+// ---------- 1. Registering a new Page Object / API endpoint fixture ----------
+// If the repo uses Playwright's `test.extend` fixture pattern (e.g. in a fixtures file):
+//
+// type MyFixtures = {
+//     ...existing entries...
+//     <name>Page: <Name>Page,          // add to the type map
+//     <name>Endpoint: <Name>Endpoint,   // if a new API layer is needed
+// };
+//
+// export const test = base.extend<MyFixtures>({
+//     ...existing entries...
+//     <name>Page: async ({ page }, use) => {
+//         await use(new <Name>Page(page));
+//     },
+//     <name>Endpoint: async ({ }, use) => {
+//         await use(new <Name>Endpoint());
+//     },
+// });
+//
+// Also export/register the new class wherever this repo's barrel/index files require it.
+
+// ---------- 2. Adding/extending test data ----------
+// Reuse the existing data file/builder for the same feature area if one exists — add new values
+// in the same style rather than nesting a new structure. Only create a new file if the feature
+// area has no data file yet, following the same shape as the closest existing one:
+//
+// <area>Data.json (example flat-JSON shape — only if the repo already stores data this way):
+// {
+//     "someBaseValue": "Example_",
+//     "someField": "example-value",
+//     "messages": {
+//         "someFieldRequired": "This field is required",
+//         "somethingCreated": "Created!"
+//     }
+// }
+//
+// Build unique/dynamic values (titles, emails, etc.) the same way this repo's existing tests
+// build them (e.g. a shared timestamp/date helper) — don't hardcode unique strings.
+
+// ---------- 3. Auth/session data ----------
+// Follow whatever authenticated-session convention this repo already has (e.g. a saved storage
+// state file consumed by both the browser context and API auth headers, a login-before-each hook,
+// environment-provided tokens). Only override it explicitly for tests that must run
+// unauthenticated, the same way this repo's own tests do — don't invent a new session mechanism.
+
+// ---------- 4. API JSON schema validation (only if the repo already supports it) ----------
+// If this repo already has a schema-validation helper (e.g. wired to a JSON Schema library like
+// Ajv) but no example schema file yet, derive a new schema from the real observed API response
+// (call the live endpoint, inspect the actual JSON) rather than guessing field names/types, and
+// confirm required-vs-optional fields with the user if the shape is ambiguous. If no such
+// mechanism exists at all in this repo, don't introduce one without asking first.

@@ -1,0 +1,86 @@
+// GENERIC REFERENCE TEMPLATE — a repo-agnostic starting scaffold for an API endpoint/client class.
+// Adapt every part to the CURRENT repository's real conventions once discovered: HTTP helper
+// functions, auth handling, assertion helpers, logging, decorators, JSDoc style. If a real file in
+// this repo already covers the same case, follow its exact shape instead of this generic one.
+// Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before editing.
+//
+// Likely file path convention: <apis-dir>/<Area>/<Name>Endpoint.ts — confirm the real convention
+// in this repo before naming/placing the file, and export it from any barrel/index file used.
+// Fixture wiring (no `page` dependency) — see fixture.template section 1 for the exact DI shape.
+
+import { type APIRequestContext, type APIResponse, expect } from '@playwright/test';
+// If this repo has HTTP helper functions, auth-header helpers, response-assertion helpers, a
+// logger, or a step-logging decorator, import and use them here instead of calling `request`/
+// `expect` directly — don't invent a new helper layer if one already exists.
+// Only needed if this resource requires auth (source the token the same way this repo's own
+// authenticated endpoint classes do — e.g. a saved session file — don't invent a new source):
+// import storage from '<path-to-existing-session-file>';
+
+export class <Name>Endpoint {
+
+    //============================================Request Objects=================================================
+
+    private readonly endpoint = '/<resource>';
+
+    // Only needed for authenticated resources — omit entirely for public endpoints:
+    // private readonly requestHeaders = {
+    //     'Content-Type': 'application/json',
+    //     'Authorization': `Bearer ${token}`
+    // };
+
+    // Only needed when a call sends a JSON body:
+    private requestBody(someField: string) {
+        return {
+            someField: someField
+        };
+    }
+
+    //=============================================Request Functions===============================================
+
+    /**
+     * <One-line description of what this call does.>
+     * Automatically asserts that the response status is <code> before returning.
+     * @param {APIRequestContext} request - The Playwright API request context for making HTTP calls
+     * @param {string} someField - <description>
+     * @returns {Promise<number>} <what the caller gets back — an ID, a reference, etc.>
+     * @throws {Error} If the response status is not <code> (assertion failure)
+     * @example
+     * const id = await new <Name>Endpoint().createSomething(request, 'value');
+     */
+    async createSomething(request: APIRequestContext, someField: string): Promise<number> {
+        const response = await request.post(this.endpoint, { data: this.requestBody(someField) /*, headers: this.requestHeaders */ });
+        expect(response.status()).toBe(201);
+        const responseBody = await response.json();
+        return responseBody.data.id;
+    }
+
+    /**
+     * Deletes an existing resource via this API endpoint.
+     * Automatically asserts that the response status is 200 before returning.
+     * @param {APIRequestContext} request - The Playwright API request context for making HTTP calls
+     * @param {number} id - The ID of the resource to delete
+     * @returns {Promise<APIResponse>} The API response object confirming deletion with status 200
+     * @throws {Error} If the response status is not 200 or if deletion fails
+     * @example
+     * const response = await new <Name>Endpoint().deleteSomething(request, 12);
+     */
+    async deleteSomething(request: APIRequestContext, id: number): Promise<APIResponse> {
+        const response = await request.delete(`${this.endpoint}/${id}` /*, { headers: this.requestHeaders } */);
+        expect(response.status()).toBe(200);
+        return response;
+    }
+}
+
+// ---------- Verifying more than just the status code ----------
+// Assert response value/content, timing, and headers using whatever assertion helpers this repo
+// already provides, or plain `expect()` against `await response.json()` if it doesn't. Examples:
+//   expect((await response.json()).data.title).toBe(expectedTitle);
+//   expect(await response.text()).toContain('Created!');
+//
+// ---------- Schema validation (only if the repo already supports it) ----------
+// import someSchema from '<path-to-existing-schemas-dir>/<name>-schema.json';
+// await assertResponseSchema(response, someSchema); // whatever this repo's own helper is called
+// If no schema file exists yet for this resource, derive it from the REAL observed response (call
+// the live endpoint, inspect the actual JSON) rather than guessing field names/types, and confirm
+// required-vs-optional fields with the user if the shape is ambiguous. If this repo has no
+// schema-validation mechanism at all, don't introduce one without asking first.

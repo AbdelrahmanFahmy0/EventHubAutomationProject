@@ -1,0 +1,62 @@
+// GENERIC REFERENCE TEMPLATE — a repo-agnostic starting scaffold for a Playwright test spec file.
+// Adapt every part to the CURRENT repository's real test syntax once discovered: declaration
+// style, tags/annotations, reporting calls, imports, fixtures. If a real file in this repo already
+// covers the same case, follow its exact shape instead of this generic one.
+// Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before editing.
+// For building a NEW API endpoint class used by <endpointFixture>, see api-endpoint.template.
+//
+// Do NOT introduce Given/When/Then/Cucumber or a new tagging system unless the repo already uses
+// it or the user explicitly approves the new convention.
+
+import { test, expect } from '@playwright/test';
+// Replace with the repo's own extended-test import if it wires Page Objects/API endpoints via
+// fixtures, e.g.: import { test } from '../fixtures/test-fixtures';
+// If the repo has a reporting library (metadata like epic/feature/owner/severity), import and
+// call it the same way its existing tests do — don't invent a new reporting convention.
+import <area>Data from '<path-to-existing-test-data-file>';
+
+//==========================================Variables=============================================
+
+let uniqueValue: string;
+
+//============================================Hooks===============================================
+
+// PATTERN CHOICE — pick per feature based on what this repo's own tests already do, don't mix
+// arbitrarily:
+//   1. Entity creation via the UI IS the behavior under test -> create it inside the test,
+//      clean it up inline (e.g. via an API call) at the end of that same test (see below).
+//   2. Entity is only a precondition for the behavior under test -> create it once in a
+//      suite-level `beforeAll` hook (shared across this file's tests), tear it down in the
+//      matching `afterAll` hook.
+test.beforeEach(async () => {
+    uniqueValue = `${<area>Data.someBaseValue}-${Date.now()}`;
+});
+
+//============================================Tests===============================================
+
+test.describe('<Feature> Tests', () => {
+
+    // API-level checks (status code, response value, timing, schema) belong INLINE in a UI test
+    // via whatever request/API fixture this repo already provides. Don't invent a standalone,
+    // no-UI "API test" file/convention unless this repo already has one or the user asks for it.
+
+    test('should <do the happy-path behavior>', async ({ <pageFixture>, request, <endpointFixture> }) => {
+        // Arrange / Act
+        await <pageFixture>.navigate();
+        await <pageFixture>.enterSomeField(uniqueValue);
+        await <pageFixture>.clickOnSomeButton();
+        // Assert
+        await expect(<pageFixture> /* replace with a real assertion */).toBeTruthy();
+        // Cleanup: delete the created entity via API (inline, not afterEach) — only for pattern 1
+        const id = await <endpointFixture>.getSomeID(request, uniqueValue);
+        await <endpointFixture>.deleteSomething(request, id);
+    });
+
+    test('should <show a validation/negative-case behavior>', async ({ <pageFixture> }) => {
+        await <pageFixture>.navigate();
+        await <pageFixture>.enterSomeField('');
+        await <pageFixture>.clickOnSomeButton();
+        await <pageFixture>.assertSomeFieldErrorMessage(<area>Data.messages.someFieldRequired);
+    });
+
+});
