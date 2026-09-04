@@ -137,7 +137,9 @@ proceeding on stale assumptions.
      an assertion helper) but no example schema file yet, derive a new schema from the real
      observed API response (call the live endpoint, inspect the actual JSON) rather than guessing
      field names/types; confirm required-vs-optional fields with the user if the shape is
-     ambiguous. If no such mechanism exists at all, don't introduce one without asking first.
+     ambiguous. After deriving the schema, save it as a schema file in the repository's existing
+     schemas folder, following the folder's existing naming, file-format, and formatting conventions.
+     If no such mechanism exists at all, don't introduce one without asking first.
 9. **Write the test file** in this repo's existing test directory and naming pattern, using its
    real test syntax (see Test Format Rules below). If the feature needs API-level checks alongside
    a UI flow, add them inline using this repo's existing API+UI hybrid pattern if one exists. If
