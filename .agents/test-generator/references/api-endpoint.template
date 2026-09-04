@@ -82,5 +82,6 @@ export class <Name>Endpoint {
 // await assertResponseSchema(response, someSchema); // whatever this repo's own helper is called
 // If no schema file exists yet for this resource, derive it from the REAL observed response (call
 // the live endpoint, inspect the actual JSON) rather than guessing field names/types, and confirm
-// required-vs-optional fields with the user if the shape is ambiguous. If this repo has no
-// schema-validation mechanism at all, don't introduce one without asking first.
+// required-vs-optional fields with the user if the shape is ambiguous. After deriving the schema,
+// save it in the repository's existing `schemas` folder, following its naming, file-format,
+// and formatting conventions. If this repo has no schema-validation mechanism at all, don't introduce one without asking first.
