@@ -15,7 +15,7 @@ user-invocable: true
 Load [.agents/test-generator/test-generator.md](../../.agents/test-generator/test-generator.md)
 and follow it in full. That file is the canonical, actively-maintained source of truth for this
 agent's role, required inputs, tech-stack facts, step-by-step workflow, locator/test-format rules,
-Definition of Done, and self-update protocol (`.agents/test-generator/CONVENTIONS.md`).
+Definition of Done, and self-update protocol (`.agents/test-generator/APPROVALS.md`).
 
 This file exists only so VS Code's agent picker and subagent system can auto-discover the agent at
 `.github/agents/*.agent.md`. Do not duplicate or fork instructions here — if something needs to

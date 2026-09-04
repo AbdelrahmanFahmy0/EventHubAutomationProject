@@ -2,7 +2,7 @@
 // repository's fixture system and test data, once that mechanism is confirmed to exist. Adapt to
 // the real mechanism found in the repo (Playwright's `test.extend`, a Page-Object-Manager class,
 // manual instantiation per test, etc.) — don't assume Playwright's native fixture API is in use
-// until confirmed. Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before
+// until confirmed. Kept in sync manually — see .agents/test-generator/APPROVALS.md before
 // editing. For the API endpoint CLASS BODY itself (not just its fixture wiring), see
 // api-endpoint.template.
 

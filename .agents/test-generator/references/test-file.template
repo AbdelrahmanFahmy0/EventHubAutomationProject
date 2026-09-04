@@ -2,7 +2,7 @@
 // Adapt every part to the CURRENT repository's real test syntax once discovered: declaration
 // style, tags/annotations, reporting calls, imports, fixtures. If a real file in this repo already
 // covers the same case, follow its exact shape instead of this generic one.
-// Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before editing.
+// Kept in sync manually — see .agents/test-generator/APPROVALS.md before editing.
 // For building a NEW API endpoint class used by <endpointFixture>, see api-endpoint.template.
 //
 // Do NOT introduce Given/When/Then/Cucumber or a new tagging system unless the repo already uses

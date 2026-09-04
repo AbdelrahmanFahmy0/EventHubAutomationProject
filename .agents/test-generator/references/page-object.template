@@ -2,7 +2,7 @@
 // Adapt every part of this to the CURRENT repository's real conventions once discovered: folder
 // layout, naming, imports, decorators, helper wrappers, base classes. If a real file in this repo
 // already covers the same case, follow its exact shape instead of this generic one.
-// Kept in sync manually — see .agents/test-generator/CONVENTIONS.md before editing.
+// Kept in sync manually — see .agents/test-generator/APPROVALS.md before editing.
 //
 // Likely file path convention: <pages-dir>/<Area>/<Name>Page.ts (or <Name>Dialog.ts for modals) —
 // confirm the real convention in this repo before naming/placing the file.

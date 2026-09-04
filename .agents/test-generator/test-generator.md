@@ -264,7 +264,7 @@ A feature isn't finished until:
 
 ## Conventions Log / Self-Update Protocol
 
-Full log lives in [`.agents/test-generator/CONVENTIONS.md`](./CONVENTIONS.md). After finishing a feature:
+Full log lives in [`.agents/test-generator/APPROVALS.md`](./APPROVALS.md). After finishing a feature:
 
 - Note any new pattern you had to infer, or any correction the user gave you, as a candidate
   update to this file or to this agent's reference templates.
@@ -273,7 +273,7 @@ Full log lives in [`.agents/test-generator/CONVENTIONS.md`](./CONVENTIONS.md). A
   persisting.
 - Never silently rewrite this file or the saved templates. Propose the exact diff/addition and
   wait for the user to confirm.
-- Each accepted update gets a one-line entry in `.agents/test-generator/CONVENTIONS.md`:
+- Each accepted update gets a one-line entry in `.agents/test-generator/APPROVALS.md`:
   `Updated <date> — <what changed and why>`.
 
 ## Templates
