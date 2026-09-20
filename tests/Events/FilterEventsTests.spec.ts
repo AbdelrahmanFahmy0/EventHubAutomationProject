@@ -26,7 +26,7 @@ test.describe('Filter Events Tests', { tag: "@regression" }, () => {
         await allure.severity(Severity.NORMAL);
         await allure.description('This test verifies events can be filtered by city on the Events page.');
         // Test Steps
-        const eventID = await eventsEndpoint.createEvent(request, eventTitle, eventData.eventCategory, eventData.eventCity);
+        const eventID = await eventsEndpoint.createEvent(request, eventTitle, eventData.eventCategory, eventData.indianCity);
         await eventsPage.navigate();
         await eventsPage.selectCityFilter(eventData.indianCity);
         await eventsPage.assertFirstEventCityIsCorrect(eventData.indianCity);
